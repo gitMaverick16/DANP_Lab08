@@ -31,11 +31,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         float x, y, z;
         x= event.values[0];
-        //y= event.values[1];
-        //z= event.values[2];
+        y= event.values[1];
+        z= event.values[2];
 
         texto.setText("");
-        texto.append("\n" + "El valor de aceleracion lineal en el eje x es: " + x );
+        texto.append("\n" + "Aceleración lineal en X: " + "\t"+ x + "\n" + "Aceleración lineal en Y: "+ "\t" + y + "\n" + "Aceleración lineal en Z: "+ "\t" + z);
     }
 
     @Override
