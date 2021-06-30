@@ -10,10 +10,12 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
 
     TextView texto;
+    TextView texto2;
     private SensorManager sensorManager;
     private Sensor sensor;
 
@@ -23,8 +25,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
 
         texto = (TextView)findViewById(R.id.texto);
+        texto2 = (TextView)findViewById(R.id.texto2);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+
+        if(sensor ==null){
+            Toast.makeText(this, "No se dispone del sensor", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Sensor disponible", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -36,6 +45,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         texto.setText("");
         texto.append("\n" + "Aceleración lineal en X: " + "\t"+ x + "\n" + "Aceleración lineal en Y: "+ "\t" + y + "\n" + "Aceleración lineal en Z: "+ "\t" + z);
+
+        if(y<-7){
+            texto2.setText("Caida libre vertical: Si");
+        }else{
+            texto2.setText("Caida libre vertical: No");
+        }
     }
 
     @Override
